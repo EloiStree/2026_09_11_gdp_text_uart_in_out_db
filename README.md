@@ -1,3 +1,7 @@
+```
+git submodule add https://github.com/EloiStree/2026_09_11_gdp_text_uart_in_out_db.git addons/2026_09_11_gdp_text_uart_in_out_db
+```
+
 # 2026_09_11_gdp_text_uart_in_out_db
   
 > Listen to UART input and register the value while keeping track of the device address.   
