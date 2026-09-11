@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b2j5uyg5t3171"]
+
+[ext_resource type="Script" uid="uid://b23uuxu5j86kd" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_udp_listen_thread_udp_text.gd" id="1_nnu6j"]
+[ext_resource type="Script" uid="uid://do5qg2j6n4pbu" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_gate_in_text_to_address_message.gd" id="2_05l5j"]
+[ext_resource type="PackedScene" uid="uid://r2ktvak5ue06" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/scene/guid/demo_2d_vbox_uart_in_to_ab/demo_2d_vbox_uart_in_to_ab.tscn" id="2_cy524"]
+[ext_resource type="PackedScene" uid="uid://dujv2pjbjwslj" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/scene/guid/demo_2d_vbox_uart_out_from_ui/demo_2d_vbox_uart_out_from_ui.tscn" id="3_05l5j"]
+
+[node name="UartDemo" type="Control" unique_id=1697256699]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UartIoUdpListenThreadUdpText" type="Node" parent="." unique_id=734085524]
+script = ExtResource("1_nnu6j")
+metadata/_custom_type_script = "uid://b23uuxu5j86kd"
+
+[node name="UartIoGateInTextToAddressMessage" type="Node" parent="UartIoUdpListenThreadUdpText" unique_id=1795081358]
+script = ExtResource("2_05l5j")
+metadata/_custom_type_script = "uid://do5qg2j6n4pbu"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=2001873540]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.06747891
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Demo2dVboxUartInToAb" parent="HBoxContainer" unique_id=1606824490 instance=ExtResource("2_cy524")]
+layout_mode = 2
+
+[node name="UartIoGateInRelay" parent="HBoxContainer" unique_id=717506237 instance=ExtResource("3_05l5j")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="." unique_id=957230729]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.06373008
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel" unique_id=474957023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="on_message_received" from="UartIoUdpListenThreadUdpText" to="UartIoUdpListenThreadUdpText/UartIoGateInTextToAddressMessage" method="push_in_text_to_split"]
+[connection signal="on_found_address_message_from_text" from="UartIoUdpListenThreadUdpText/UartIoGateInTextToAddressMessage" to="HBoxContainer/Demo2dVboxUartInToAb/UartIoGateInRelay" method="relay_text_received_from_address"]
+[connection signal="on_received_text_to_split" from="UartIoUdpListenThreadUdpText/UartIoGateInTextToAddressMessage" to="Panel/Label" method="set_text"]
+
+[editable path="HBoxContainer/Demo2dVboxUartInToAb"]

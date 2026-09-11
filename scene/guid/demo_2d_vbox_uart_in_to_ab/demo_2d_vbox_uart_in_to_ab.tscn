@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://r2ktvak5ue06"]
+
+[ext_resource type="Script" uid="uid://bd42c5tyrjf0x" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_gate_in_relay.gd" id="1_nbgih"]
+[ext_resource type="Script" uid="uid://c3u3sq2rt5gvf" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_relay_filter_with_prefix_suffix_to_ab_input.gd" id="2_00q6x"]
+[ext_resource type="Script" uid="uid://sl2df7heyros" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_relay_filter_with_exact_value_to_named_variant.gd" id="2_8iubl"]
+[ext_resource type="Script" uid="uid://dn7ar185jnwhx" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_format_address_key_variant.gd" id="3_tiaf0"]
+[ext_resource type="Script" uid="uid://f4ly85w3bkn0" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_relay_to_ap_input_with_signal.gd" id="4_16i8y"]
+[ext_resource type="Script" uid="uid://dqmbxxy7co57r" path="res://addons/2026_09_11_gdp_text_uart_in_out_db/script/uart_io_format_key_variant.gd" id="5_7sg2k"]
+
+[node name="Demo2dVboxUartInToAb" type="Control" unique_id=1606824490]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UartIoGateInRelay" type="Node" parent="." unique_id=908117835]
+script = ExtResource("1_nbgih")
+metadata/_custom_type_script = "uid://bd42c5tyrjf0x"
+
+[node name="UartIoRelayFilterWithExactValueToNamedVariant" type="Node" parent="UartIoGateInRelay" unique_id=1335678388]
+script = ExtResource("2_8iubl")
+metadata/_custom_type_script = "uid://sl2df7heyros"
+
+[node name="UartIoRelayFilterWithPrefixSuffixToAbInput" type="Node" parent="UartIoGateInRelay" unique_id=106085112]
+script = ExtResource("2_00q6x")
+_add_at_ready = "FILE>>>|default.uart_to_ab_input
+prefix♦️suffix♦️name_of_value
+*AX♦️*♦️accelerometer_x
+*AZ♦️*♦️accelerometer_z
+*AY♦️*♦️accelerometer_y
+*AS♦️*♦️accelerometer_strengh
+*T♦️*♦️temperature
+*C♦️*♦️compass
+*S♦️*♦️volume
+"
+metadata/_custom_type_script = "uid://c3u3sq2rt5gvf"
+
+[node name="UartIoRelayToApInputWithSignal" type="Node" parent="UartIoGateInRelay" unique_id=1119948766]
+script = ExtResource("4_16i8y")
+metadata/_custom_type_script = "uid://f4ly85w3bkn0"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=898098531]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1866481495]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer Title" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=2029667966]
+layout_mode = 2
+
+[node name="Label Address" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Title" unique_id=1657388019]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Address"
+
+[node name="Label Value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Title" unique_id=1118293602]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value"
+
+[node name="HBoxContainer Value" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=488270093]
+layout_mode = 2
+
+[node name="Label Address" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Value" unique_id=1085078299]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Label Value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Value" unique_id=981581080]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="HBoxContainer Any" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=2069749306]
+layout_mode = 2
+
+[node name="Label Address" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Any" unique_id=351719956]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Label Value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Any" unique_id=1206993284]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="UartIoFormatAddressKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/HBoxContainer Any" unique_id=1037749064]
+script = ExtResource("3_tiaf0")
+metadata/_custom_type_script = "uid://dn7ar185jnwhx"
+
+[node name="HBoxContainer Float" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=352312414]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Float" unique_id=1662162036]
+layout_mode = 2
+text = "Float"
+
+[node name="Label value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Float" unique_id=825571527]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="UartIoFormatAddressKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/HBoxContainer Float" unique_id=120127179]
+script = ExtResource("3_tiaf0")
+metadata/_custom_type_script = "uid://dn7ar185jnwhx"
+
+[node name="HBoxContainer Bool" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1476188468]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Bool" unique_id=1695779003]
+layout_mode = 2
+text = "Bool "
+
+[node name="Label value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Bool" unique_id=763450582]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="UartIoFormatAddressKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/HBoxContainer Bool" unique_id=1558324182]
+script = ExtResource("3_tiaf0")
+metadata/_custom_type_script = "uid://dn7ar185jnwhx"
+
+[node name="HBoxContainer Trigger" type="HBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=1392404496]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Trigger" unique_id=659232590]
+layout_mode = 2
+text = "Trigger"
+
+[node name="Label value" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer Trigger" unique_id=1132622812]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="UartIoFormatAddressKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/HBoxContainer Trigger" unique_id=1536257410]
+script = ExtResource("3_tiaf0")
+metadata/_custom_type_script = "uid://dn7ar185jnwhx"
+
+[node name="UartIoFormatKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/HBoxContainer Trigger" unique_id=710748173]
+script = ExtResource("5_7sg2k")
+metadata/_custom_type_script = "uid://dqmbxxy7co57r"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer" unique_id=310681069]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer" unique_id=926266207]
+layout_mode = 2
+text = "AB Input"
+
+[node name="Label Bool" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1465258653]
+layout_mode = 2
+
+[node name="UartIoFormatKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/VBoxContainer/Label Bool" unique_id=1270815250]
+script = ExtResource("5_7sg2k")
+_format_key_variant = "%s  %s"
+metadata/_custom_type_script = "uid://dqmbxxy7co57r"
+
+[node name="Label Float" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1296425710]
+layout_mode = 2
+
+[node name="UartIoFormatKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/VBoxContainer/Label Float" unique_id=1953273897]
+script = ExtResource("5_7sg2k")
+_format_key_variant = "%s  %s"
+metadata/_custom_type_script = "uid://dqmbxxy7co57r"
+
+[node name="Label Trigger" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1736225954]
+layout_mode = 2
+
+[node name="UartIoFormatKeyVariant" type="Node" parent="ScrollContainer/VBoxContainer/VBoxContainer/Label Trigger" unique_id=1159480735]
+script = ExtResource("5_7sg2k")
+_format_key_variant = "%s  %s"
+metadata/_custom_type_script = "uid://dqmbxxy7co57r"
+
+[connection signal="on_relay_received_message_from_address" from="UartIoGateInRelay" to="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" method="push_in_package_to_parse"]
+[connection signal="on_relay_received_message_from_address" from="UartIoGateInRelay" to="UartIoGateInRelay/UartIoRelayFilterWithExactValueToNamedVariant" method="push_in_address_value"]
+[connection signal="on_relay_received_only_address" from="UartIoGateInRelay" to="ScrollContainer/VBoxContainer/HBoxContainer Value/Label Address" method="set_text"]
+[connection signal="on_relay_received_only_text" from="UartIoGateInRelay" to="ScrollContainer/VBoxContainer/HBoxContainer Value/Label Value" method="set_text"]
+[connection signal="on_bool_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithExactValueToNamedVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Bool/UartIoFormatAddressKeyVariant" method="push_in_address_key_value_to_format"]
+[connection signal="on_bool_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithExactValueToNamedVariant" to="UartIoGateInRelay/UartIoRelayToApInputWithSignal" method="push_to_ap_input_boolean_with_address"]
+[connection signal="on_trigger_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithExactValueToNamedVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Trigger/UartIoFormatKeyVariant" method="push_in_key_value_to_format"]
+[connection signal="on_trigger_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithExactValueToNamedVariant" to="UartIoGateInRelay/UartIoRelayToApInputWithSignal" method="push_to_ap_input_trigger"]
+[connection signal="on_any_value_found_striped" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="ScrollContainer/VBoxContainer/HBoxContainer Any/UartIoFormatAddressKeyVariant" method="push_in_address_key_value_to_format"]
+[connection signal="on_bool_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="ScrollContainer/VBoxContainer/HBoxContainer Bool/UartIoFormatAddressKeyVariant" method="push_in_address_key_value_to_format"]
+[connection signal="on_bool_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="UartIoGateInRelay/UartIoRelayToApInputWithSignal" method="push_to_ap_input_boolean_with_address"]
+[connection signal="on_float_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="ScrollContainer/VBoxContainer/HBoxContainer Float/UartIoFormatAddressKeyVariant" method="push_in_address_key_value_to_format"]
+[connection signal="on_float_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="UartIoGateInRelay/UartIoRelayToApInputWithSignal" method="push_to_ap_input_float_with_address"]
+[connection signal="on_trigger_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="ScrollContainer/VBoxContainer/HBoxContainer Trigger/UartIoFormatAddressKeyVariant" method="push_in_address_key_value_to_format"]
+[connection signal="on_trigger_value_found_with_address" from="UartIoGateInRelay/UartIoRelayFilterWithPrefixSuffixToAbInput" to="UartIoGateInRelay/UartIoRelayToApInputWithSignal" method="push_to_ap_input_trigger_with_address"]
+[connection signal="on_relay_to_ap_input_boolean" from="UartIoGateInRelay/UartIoRelayToApInputWithSignal" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Bool/UartIoFormatKeyVariant" method="push_in_key_value_to_format"]
+[connection signal="on_relay_to_ap_input_float" from="UartIoGateInRelay/UartIoRelayToApInputWithSignal" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Float/UartIoFormatKeyVariant" method="push_in_key_value_to_format"]
+[connection signal="on_relay_to_ap_input_trigger" from="UartIoGateInRelay/UartIoRelayToApInputWithSignal" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Trigger/UartIoFormatKeyVariant" method="push_in_key_value_to_format"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/HBoxContainer Any/UartIoFormatAddressKeyVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Any/Label Value" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/HBoxContainer Float/UartIoFormatAddressKeyVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Float/Label value" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/HBoxContainer Bool/UartIoFormatAddressKeyVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Bool/Label value" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/HBoxContainer Trigger/UartIoFormatAddressKeyVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Trigger/Label value" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/HBoxContainer Trigger/UartIoFormatKeyVariant" to="ScrollContainer/VBoxContainer/HBoxContainer Trigger/Label value" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/VBoxContainer/Label Bool/UartIoFormatKeyVariant" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Bool" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/VBoxContainer/Label Float/UartIoFormatKeyVariant" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Float" method="set_text"]
+[connection signal="on_formatted_text" from="ScrollContainer/VBoxContainer/VBoxContainer/Label Trigger/UartIoFormatKeyVariant" to="ScrollContainer/VBoxContainer/VBoxContainer/Label Trigger" method="set_text"]
