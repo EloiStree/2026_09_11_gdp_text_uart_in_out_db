@@ -29,3 +29,8 @@ But UART input needs a bit of parsing to be valid in the key-value format.
 
 So this add-on tries to work on those topics.   
 
+----------
+
+Find here some python code to read and write UART to your Micro:bit :    
+https://github.com/EloiStree/2026_09_11_python_micro_bit_hub      
+
